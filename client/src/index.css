@@ -20,3 +20,16 @@
 .hide-scrollbar::-webkit-scrollbar {
 	display: none;
 }
+
+.connect-wallet-modal {
+	transition: transform 0.5s ease-in-out;
+	transform: translateX(100%); /* Start off-screen to the right */
+  }
+  
+  .connect-wallet-modal--visible {
+	transform: translateX(0); /* Slide in to view */
+  }
+  
+  .connect-wallet-modal--invisible {
+	transform: translateX(100%); /* Slide out of view */
+  }

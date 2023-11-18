@@ -1,9 +1,29 @@
 import React from 'react'
-import TokenComponent from './TokenComponent'
 import { FaSearch } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
+import { useDispatch, useSelector } from 'react-redux';
+import { TokenInterface } from '../../interfaces/TokenInterface';
+import { setTokenToPay, setTokenToReceive } from '../../store/actions';
+import TokenList from './TokenList';
 
-const SelectToken: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+interface SelectTokenProps {
+	onClose: () => void
+}
+
+const SelectToken: React.FC<SelectTokenProps> = ({ onClose }) => {
+	const dispatch = useDispatch();
+	const selectingFor = useSelector((state: any) => state.selectingFor);
+
+	const handleTokenSelect = (token: TokenInterface) => {
+	  if (selectingFor === 'pay') {
+		dispatch(setTokenToPay(token));
+	  } else if (selectingFor === 'receive') {
+		dispatch(setTokenToReceive(token));
+	  }
+	  onClose();
+	};
+
+
   return (
     <div className='absolute top-0 left-0 w-screen h-screen bg-black bg-opacity-60 flex justify-center items-center' onClick={onClose}>
       <div className='bg-[#131313] w-[418px] h-[675px] border border-neutral-800 rounded-3xl flex flex-col overflow-hidden' onClick={(e) => e.stopPropagation()}>
@@ -27,19 +47,7 @@ const SelectToken: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         <hr className='border-neutral-800'/>
 
 		{/* Token list */}
-        <div className='overflow-auto hide-scrollbar flex-1'>
-				<TokenComponent />
-				<TokenComponent />
-				<TokenComponent />
-				<TokenComponent />
-				<TokenComponent />
-				<TokenComponent />
-				<TokenComponent />
-				<TokenComponent />
-				<TokenComponent />
-				<TokenComponent />
-				<TokenComponent />
-		</div>
+        <TokenList selectToken={handleTokenSelect}/>
 
 	  </div>
 	</div>
