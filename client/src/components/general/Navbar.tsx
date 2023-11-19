@@ -1,11 +1,15 @@
 import React from 'react'
 import { GiUnicorn } from "react-icons/gi";
+import { useSelector } from 'react-redux';
 
 interface NavbarProps {
 	onConnectWalletClick: () => void;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onConnectWalletClick }) => {
+
+	const isWalletConnected = useSelector((state: any) => state.isWalletConnected);
+
   return (
     <div className='flex justify-between items-center p-4 bg-[#131313] text-white'>
       {/* Logo and Links */}
@@ -20,10 +24,18 @@ const Navbar: React.FC<NavbarProps> = ({ onConnectWalletClick }) => {
       </div>
 
       {/* Connect Wallet Button */}
-      <div>
-		<button className='px-3 py-2 bg-[#311c31] text-[#fc72ff] rounded-full hover:bg-[#291729] font-semibold' onClick={onConnectWalletClick}>
-			Connect
-		</button>
+      <div onClick={onConnectWalletClick}>
+				{
+					isWalletConnected ?
+					<div className='flex gap-2 items-center rounded-3xl hover:bg-neutral-800 hover:bg-opacity-20 p-1'>
+						<div className='h-8 w-8 bg-black rounded-full' />
+						<p>0x123.eth</p>
+					</div>
+					:
+						<button className='px-3 py-2 bg-[#311c31] text-[#fc72ff] rounded-full hover:bg-[#291729] font-semibold' >
+							Connect
+						</button>
+				}
       </div>
     </div>
   )

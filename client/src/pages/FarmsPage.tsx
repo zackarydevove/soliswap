@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import Navbar from '../components/general/Navbar';
 import FarmComponent from '../components/farms/FarmComponent';
 import ConnectWallet from '../components/general/ConnectWallet';
+import { FaR } from 'react-icons/fa6';
+import { mockFarms } from '../utils/mockFarms';
 
 const FarmsPage: React.FC = () => {
 	const [isConnectWalletVisible, setIsConnectWalletVisible] = useState(false);
@@ -17,25 +19,24 @@ const FarmsPage: React.FC = () => {
 	};
 
   return (
-    <div className='h-screen w-screen bg-[#131313]'>
+    <div className='min-h-screen w-screen bg-[#131313]'>
       <Navbar onConnectWalletClick={toggleConnectWallet}/>
       <div className='flex flex-col justify-center items-center mt-16 text-white'>
-		<p className='text-3xl font-bold'>FARM</p>
-        <div className='grid grid-cols-2 gap-4 mt-8 '>
-			<FarmComponent/>
-			<FarmComponent/>
-			<FarmComponent/>
-			<FarmComponent/>
-			<FarmComponent/>
-			<FarmComponent/>
-			<FarmComponent/>
-
-		</div>
+				<div className=''>
+					<p className='text-3xl font-bold'>Farms</p>
+					<div className='grid grid-cols-2 gap-4 mt-8 '>
+						{
+							mockFarms.map((farm, index) => (
+								<FarmComponent 
+									farm={farm}
+									onConnectWalletClick={toggleConnectWallet}
+								/>
+							))
+						}
+					</div>
+				</div>
       </div>
-
 	  <ConnectWallet onClose={toggleConnectWallet} isVisible={isConnectWalletVisible} />
-
-	  
 	</div>
   )
 }

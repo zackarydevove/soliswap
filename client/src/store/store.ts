@@ -3,6 +3,7 @@ const initialState = {
   tokenToPay: null,
   tokenToReceive: null,
   selectingFor: null,
+  isWalletConnected: false,
 };
 
 function tokenReducer(state = initialState, action: any) {
@@ -13,6 +14,8 @@ function tokenReducer(state = initialState, action: any) {
       return { ...state, tokenToReceive: action.payload };
 	case 'SET_SELECTING_FOR':
 	  return { ...state, selectingFor: action.payload };
+  case 'TOGGLE_WALLET_CONNECTION':
+    return { ...state, isWalletConnected: !state.isWalletConnected };
 	default:
 	  return state;
   }

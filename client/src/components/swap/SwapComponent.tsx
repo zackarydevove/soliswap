@@ -4,6 +4,7 @@ import { FaChevronDown, FaArrowDown } from "react-icons/fa";
 import SwapSettings from './SwapSettings';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectingFor, setTokenToPay, setTokenToReceive } from '../../store/actions';
+import { FaGasPump } from "react-icons/fa";
 
 interface SwapComponentProps {
 	onTokenSelectClick: () => void
@@ -15,6 +16,7 @@ const SwapComponent: React.FC<SwapComponentProps> = ({ onTokenSelectClick, onCon
 
 	const tokenToPay = useSelector((state: any) => state.tokenToPay);
 	const tokenToReceive = useSelector((state: any) => state.tokenToReceive);
+	const walletConnected = useSelector((state: any) => state.isWalletConnected);
   
 	const dispatch = useDispatch();
 
@@ -110,22 +112,48 @@ const SwapComponent: React.FC<SwapComponentProps> = ({ onTokenSelectClick, onCon
           </div>
         </div>
 
-		{/* Reverse button */}
-		<div
-			className='w-10 h-10 flex justify-center items-center rounded-xl absolute top-[50%] -translate-y-[50%] left-[50%] -translate-x-[50%] bg-[#1b1b1b] border-4 border-[#131313] hover:cursor-pointer'
-			onClick={handleReverseClick}
-		>
-			<FaArrowDown className='text-white'/>
-		</div>
+				{/* Reverse button */}
+				<div
+					className='w-10 h-10 flex justify-center items-center rounded-xl absolute top-[50%] -translate-y-[50%] left-[50%] -translate-x-[50%] bg-[#1b1b1b] border-4 border-[#131313] hover:cursor-pointer'
+					onClick={handleReverseClick}
+				>
+					<FaArrowDown className='text-white'/>
+				</div>
 
-      </div>
+    	</div>
 
-      {/* Connect Wallet Button */}
-      <div className='mt-1'>
-    	<button className='w-full py-4 bg-[#311c31] text-[#fc72ff] rounded-xl hover:bg-[#291729]' onClick={onConnectWalletClick}>
-          Connect Wallet
-        </button>
-      </div>
+			{
+				walletConnected ?
+				<div className='flex flex-col'>
+					<div className='mt-1'>
+						<div className='flex justify-between text-white w-full p-3  border border-neutral-800 rounded-xl text-center'>
+							<div className='flex gap-1'>
+								<p className='text-white text-sm'>1 CRV = 0.000029 ETH</p>
+								<p className='text-[#838383] text-sm '>($1,979,60)</p>
+							</div>
+							<div className='flex items-center gap-2 text-[#838383]'>
+								<FaGasPump/>
+								<p className='text-sm'>$14.30</p>
+								<FaChevronDown/>
+							</div>
+						</div>
+					</div>
+
+					{/* Insufficient Balance */}
+					<div className='mt-1'>
+						<div className='w-full py-4 bg-[#1b1b1b] text-[#515151] rounded-xl text-center'>
+								Insufficient {tokenToPay?.name} balance
+						</div>
+					</div>
+				</div>
+				:
+					// {/* Connect Wallet Button */}
+					<div className='mt-1'>
+						<button className='w-full py-4 bg-[#311c31] text-[#fc72ff] rounded-xl hover:bg-[#291729]' onClick={onConnectWalletClick}>
+								Connect Wallet
+						</button>
+					</div>
+			}
     </div>
   )
 }

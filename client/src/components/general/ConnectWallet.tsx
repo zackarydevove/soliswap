@@ -17,7 +17,7 @@ const ConnectWallet: React.FC<ConnectWalletProps> = ({ onClose, isVisible }) => 
 			<FaAnglesRight size={"1.3em"} className='text-neutral-500 hover:cursor-pointer hover:text-white'/>
 		</div>
 		{isSettingsVisible && <ConnectWalletSettings onClose={() => setIsSettingsVisible(false)} />}
-		{!isSettingsVisible && <ConnectWalletComponent onClose={onClose} isVisible={isVisible} setSettingsVisible={() => setIsSettingsVisible(true)} />}
+		{!isSettingsVisible && <ConnectWalletComponent onClose={onClose} setSettingsVisible={() => setIsSettingsVisible(true)} />}
 	</div>
   )
 }

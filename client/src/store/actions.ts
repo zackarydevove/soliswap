@@ -14,3 +14,7 @@ export const setSelectingFor = (selectingFor: 'pay' | 'receive') => ({
 	type: 'SET_SELECTING_FOR',
 	payload: selectingFor,
 });
+
+export const toggleWalletConnection = () => ({
+  type: 'TOGGLE_WALLET_CONNECTION',
+});
