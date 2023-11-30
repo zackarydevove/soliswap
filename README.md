@@ -12,9 +12,11 @@ Soliswap is an Ethereum-based DApp deployed on the Ethereum testnet. It's a trai
 </ul>
 
 <h2>Technology Stack</h2>
-Frontend: React, Tailwind CSS, Redux, TypeScript
-Backend: Node.js, Express.js
-Blockchain Development: Hardhat, Ether.js, Solidity
+<ul>
+<li>Frontend: React, Tailwind CSS, Redux, TypeScript </li>
+<li>Backend: Node.js, Express.js </li>
+<li>Blockchain Development: Solidity, Hardhat, Ether.js </li>
+</ul>
 
 <h2>Status</h2>
 
